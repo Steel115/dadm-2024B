@@ -23,8 +23,7 @@ const newItemPriority = ref('low');
      <label><input type="radio" value="high" v-model="newItemPriority">Alta</label>
      {{ newItemPriority == 'low' ? '🧊' : '🔥'}}
     <ul>
-        <li
-         v-for="({id,label}, i) in items" :key="id"> {{ i+1 }} {{i%2==0?'🔥':'🛍️'}} {{label}} </li>
+        <li v-for="({id,label}, i) in items" :key="id"> {{ i+1 }} {{i%2==0?'🔥':'🛍️'}} {{label}} </li>
     </ul>
 </template>
 

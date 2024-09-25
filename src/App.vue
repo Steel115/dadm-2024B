@@ -16,7 +16,7 @@ const newItem = ref('');
     <i class="material-icons shopping-cart-icon">local_mall</i>
     {{ header }}
     </h1>
-    <input v-model.lazy="newItem" type="text" placeholder="Agregar artiuclo"> {{newItem}}
+    <input v-model="newItem" type="text" placeholder="Agregar artiuclo"> {{newItem}}
     <ul>
         <li
          v-for="({id,label}, i) in items" :key="id"> {{ i+1 }} {{i%2==0?'🔥':'🛍️'}} {{label}} </li>

@@ -9,19 +9,35 @@ const items = ref([
     {id:'3', label: '10 chetos'}
 ]);
 const newItem = ref(''); 
-const newItemPriority = ref('low');
+const newItemHighPriority = ref(false);
 </script>
 
 <template>
 <h1>
     <i class="material-icons shopping-cart-icon">local_mall</i>
     {{ header }}
-    </h1>
-    <input v-model="newItem" type="text" placeholder="Agregar artiuclo">
-    <!-- Radio Buttons -->
-     <label><input type="radio" value="low" v-model="newItemPriority">Bajo</label>
-     <label><input type="radio" value="high" v-model="newItemPriority">Alta</label>
-     {{ newItemPriority == 'low' ? '🧊' : '🔥'}}
+</h1>
+
+<!-- Agrupando en un div las entradas -->
+<form v-on:submit.prevent="items.push({ id: items.length + 1, label: newItem })" class="add-item fomr">
+    
+    <!-- entrada de texto -->
+    <input
+      v-model.trim="newItem"
+      type="text"
+      placeholder="Add Item">
+    
+    <!-- Caja de seleccion de prioridad -->
+    <label>
+      <input type="checkbox" v-model="newItemHighPriority" />
+      Alta prioridad
+    </label>
+
+    <!-- Boton -->
+    <button class="btn btn-primary"> Guardar </button>
+  
+</form>
+    
     <ul>
         <li v-for="({id,label}, i) in items" :key="id"> {{ i+1 }} {{i%2==0?'🔥':'🛍️'}} {{label}} </li>
     </ul>

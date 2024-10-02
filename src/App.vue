@@ -2,15 +2,26 @@
 import { ref } from "vue";
 //modelo 
 const header = ref('App lista de Compras');
+// ---Items---
 const items = ref([
     {id:'0', label: '10 bolillos'}, 
     {id:'1', label: '1 lata de volt'}, 
     {id:'2', label: '1 bote de café'},
     {id:'3', label: '10 chetos'}
 ]);
+//Item-Method
+const saveItem = () => {
+    //Agregamos otro item
+    items.value.push({id: items.value.length + 1, label: newItem.value});
+    //queda vacia la caja de texto
+    newItem.value = '';
+    
+}
+
 const newItem = ref(''); 
 const newItemHighPriority = ref(false);
 </script>
+
 
 <template>
 <h1>
@@ -19,7 +30,7 @@ const newItemHighPriority = ref(false);
 </h1>
 
 <!-- Agrupando en un div las entradas -->
-<form v-on:submit.prevent="items.push({ id: items.length + 1, label: newItem })" class="add-item fomr">
+<form class="add-item form" v-on:submit.prevent="saveItem">
     
     <!-- entrada de texto -->
     <input
@@ -37,7 +48,7 @@ const newItemHighPriority = ref(false);
     <button class="btn btn-primary"> Guardar </button>
   
 </form>
-    
+    <!-- Lista de items -->
     <ul>
         <li v-for="({id,label}, i) in items" :key="id"> {{ i+1 }} {{i%2==0?'🔥':'🛍️'}} {{label}} </li>
     </ul>

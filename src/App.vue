@@ -20,6 +20,13 @@ const saveItem = () => {
 
 const newItem = ref(''); 
 const newItemHighPriority = ref(false);
+
+//metodo para crear el hipervinculo
+const hipervinculo = () => {
+    return newItem.value === '' ? 'https://www.google.com' :
+    'https://' + newItem.value;
+}
+
 </script>
 
 
@@ -28,6 +35,11 @@ const newItemHighPriority = ref(false);
     <i class="material-icons shopping-cart-icon">local_mall</i>
     {{ header }}
 </h1>
+
+<!-- Hipervinculo -->
+<a v-bind:href="hipervinculo()" target="_blank">
+  {{ newItem == '' ? 'link' : newItem }}
+</a>
 
 <!-- Agrupando en un div las entradas -->
 <form class="add-item form" v-on:submit.prevent="saveItem">

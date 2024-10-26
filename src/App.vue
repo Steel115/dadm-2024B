@@ -11,25 +11,40 @@ const items = ref([
 ]);
 //Item-Method
 const saveItem = () => {
-    //Agregamos otro item
-    items.value.push({id: items.value.length + 1, label: newItem.value});
-    //queda vacia la caja de texto
+    //Metodo para agregar otro item a la lista
+    items.value.push({
+      id: items.value.length + 1, 
+      label: newItem.value,
+      highPriority: newItemHighPriority.value
+    });
+    //reiniciando la entrada de texto
     newItem.value = '';
+    newItemHighPriority.value = false;
     
-}
+};
+const doEdit = (edit)=>{
+  editing.value = edit;
+  // Limpiando la entrada de texto
+  // en caso de que se oculte o muestre
+  // el formulario
+  newItem.value = "";
+  newItemHighPriority.value = false;
+};
 
-const newItem = ref(''); 
+const newItem = ref('');
 const newItemHighPriority = ref(false);
 const editing = ref(false);
-const activateEdition = (activate) =>{ 
-    editing.value = activate;
+
+// Alternando estado de compra del item
+const togglePurchased = (item) => {
+  item.purchased = !item.purchased;
 };
+
 //metodo para crear el hipervinculo
 /*const hipervinculo = () => {
     return newItem.value === '' ? 'https://www.google.com' :
     'https://' + newItem.value;
 }*/
-
 </script>
 
 <template>
@@ -38,8 +53,8 @@ const activateEdition = (activate) =>{
     <i class="material-icons shopping-cart-icon">local_mall</i>
     {{ header }}
   </h1>
-  <button v-if="editing" class="btn" @click="activateEdition(false)">CANCELAR</button>
-  <button v-else class="btn btn-primary" @click="activateEdition(true)">AGREGAR ARTICULO</button>
+  <button v-if="editing" class="btn" @click="doEdit(false)">CANCELAR</button>
+  <button v-else class="btn btn-primary" @click="doEdit(true)">AGREGAR ARTICULO</button>
 </div>
 
 <!-- Hipervinculo -->
@@ -71,24 +86,14 @@ const activateEdition = (activate) =>{
     <!-- Lista de items objetos-->
     <ul>
     <li
-         v-for="{label, id, purchased, priority} in items" 
+         v-for="({label, id, purchased, priority}, index) in items" 
+         @click="togglePurchased(items[index])"
          :key="id"
-         class="amazing" 
-         :class="{strikeout: purchased, priority: priority}"> 
+         :class="{strikeout: purchased, priority: highPriority}"> 
          {{priority ? "🔥": "🛍️"}}
         {{label}} </li>
   </ul>
-   
-  <!-- Lista de items con arreglos-->
-  <ul>
-    <li
-         v-for="{label, id, purchased, priority} in items" 
-         :key="id"
-         
-         :class="[purchased ? 'strikeout' : '', priority ? 'priority' : '']"> 
-         {{priority ? "🔥": "🛍️"}}
-        {{label}} </li>
-  </ul>
+  
   <p v-if="items.length === 0"> 🥀NO HAY ELEMENTOS EN TU LISTA 🥀</p>
 </template>
 

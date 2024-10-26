@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 //modelo 
 const header = ref('App lista de Compras');
 // ---Items---
@@ -40,6 +40,17 @@ const togglePurchased = (item) => {
   item.purchased = !item.purchased;
 };
 
+// Creando una propiedad computada
+const characterCount = computed(()=>{
+  // Toda propiedad computada debe regresar un valor
+  return newItem.value.length;
+});
+
+// Creando propiedad computada que invierte items de la lista
+const reversedItems = computed(() => {
+  return [...items.value].reverse();
+});
+
 //metodo para crear el hipervinculo
 /*const hipervinculo = () => {
     return newItem.value === '' ? 'https://www.google.com' :
@@ -61,6 +72,11 @@ const togglePurchased = (item) => {
 <!--<a v-bind:href="hipervinculo()" target="_blank">
   {{ newItem == '' ? 'link' : newItem }}
 </a>-->
+
+<!-- Contador -->
+<p class="counter">
+    {{ characterCount }} / 200
+  </p>
 
 <!-- Agrupando en un div las entradas -->
 <form v-on:submit.prevent="saveItem()" v-if="editing" class="add-item fomr">
@@ -86,8 +102,8 @@ const togglePurchased = (item) => {
     <!-- Lista de items objetos-->
     <ul>
     <li
-         v-for="({label, id, purchased, priority}, index) in items" 
-         @click="togglePurchased(items[index])"
+         v-for="({label, id, purchased, priority}, index) in reversedItems" 
+         @click="togglePurchased(reversedItems[index])"
          :key="id"
          :class="{strikeout: purchased, priority: highPriority}"> 
          {{priority ? "🔥": "🛍️"}}

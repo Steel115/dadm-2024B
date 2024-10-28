@@ -105,7 +105,7 @@ const reversedItems = computed(() => {
          v-for="({label, id, purchased, priority}, index) in reversedItems" 
          @click="togglePurchased(reversedItems[index])"
          :key="id"
-         :class="{strikeout: purchased, priority: highPriority}"> 
+         :class="{strikeout: purchased, priority: priority}"> 
          {{priority ? "🔥": "🛍️"}}
         {{label}} </li>
   </ul>

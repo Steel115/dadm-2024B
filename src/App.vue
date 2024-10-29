@@ -79,7 +79,7 @@ const reversedItems = computed(() => {
   </p>
 
 <!-- Agrupando en un div las entradas -->
-<form v-on:submit.prevent="saveItem()" v-if="editing" class="add-item fomr">
+<form v-on:submit.prevent="saveItem()" v-if="editing" class="add-item form">
 
     <!-- entrada de texto -->
     <input
@@ -102,10 +102,10 @@ const reversedItems = computed(() => {
     <!-- Lista de items objetos-->
     <ul>
     <li
-         v-for="({label, id, purchased, priority}, index) in reversedItems" 
+         v-for="({label, id, purchased, highPriority}, index) in reversedItems" 
          @click="togglePurchased(reversedItems[index])"
          :key="id"
-         :class="{strikeout: purchased, priority: priority}"> 
+         :class="{strikeout: purchased, priority: highPriority}"> 
          {{priority ? "🔥": "🛍️"}}
         {{label}} </li>
   </ul>

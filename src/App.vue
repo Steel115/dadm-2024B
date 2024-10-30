@@ -4,10 +4,10 @@ import { ref, computed } from "vue";
 const header = ref('App lista de Compras');
 // ---Items---
 const items = ref([
-    {id:'0', label: '10 bolillos',purchased: true, priority: true}, 
-    {id:'1', label: '1 lata de volt',purchased: true, priority: true}, 
-    {id:'2', label: '1 bote de café',purchased: false, priority: false},
-    {id:'3', label: '10 chetos',purchased: false, priority: false}
+    {id:'0', label: '10 bolillos',purchased: true, highPriority: true}, 
+    {id:'1', label: '1 lata de volt',purchased: true, highPriority: true}, 
+    {id:'2', label: '1 bote de café',purchased: false, highPriority: false},
+    {id:'3', label: '10 chetos',purchased: false, highPriority: false}
 ]);
 //Item-Method
 const saveItem = () => {

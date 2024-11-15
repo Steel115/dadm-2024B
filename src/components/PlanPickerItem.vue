@@ -3,7 +3,7 @@
 
     <div class="description">
       
-      <span class="title">{{ name }} {{ selected ? '✓' : '' }}</span>
+      <span class="title">{{ name }} {{ isSelected ? '✓' : '' }}</span>
     
     </div>
   
@@ -11,29 +11,33 @@
 </template>
 
 <script setup>
-//impor ref functio
-import {ref} from 'vue';
-//Usando un macro para
+//importamos la funcion computed de vue para la propiedad computada
+import { computed } from 'vue';
+
+//borramos ref
 //defenir las props
 //const props = defineProps(['name','planIcon']);
 const props = defineProps({
     name: {
       type: String,
       required: true
-    }
+    },
+    selectPlan: String
   });
+
   //Definir un evento (macro)
-  const emit = defineEmits(['select']);
-  //variable reactiva que permite recordar 
-  // si el plan ha sido seleccionado
-  const selected = ref(false);
-  //funcion que permite cambiar el estado de la variable
+const emit = defineEmits(['select']);
+ //funcion que permite cambiar el estado de la variable
   const selectPlan = () => {
-    selected.value =true;
-    //emitir un evento de que el
+    //Emitir un evento de que el
     //plan ha sido seleccionado
     emit('select', props.name);
-  }
+  };
+  //creando una propiedad computada 
+  //para saber si el plan ha sido seleccionado
+  const isSelected = computed(() => {
+    return props.name === props.selectedPlan;
+  });
 </script>
 
 <style scoped>

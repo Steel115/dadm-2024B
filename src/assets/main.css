@@ -735,3 +735,7 @@ a:not(.btn):hover {
   color: #127077;
   text-decoration: underline;
 }
+
+.plans .selected {
+  background-color: #B3CFD0;
+}

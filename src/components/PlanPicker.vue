@@ -17,12 +17,12 @@ console.log("termina de ejecutar el scrip setup");
 
  //intentando obtener la referencia al elemento .plans
  onMounted(() => {
-  console.log("El componente PlanPicker fue montado 😎");
+  console.log("El componente PlanPicker fue montado ☕");
   console.log(plansWrapper.value);
  })
  //registrando el hook mounted
 onUnmounted(()=>{
-  console.log("El componente PlanPicker se ha desmontado");
+  console.log("El componente PlanPicker fue desmontado 😭");
  })
 </script>
  

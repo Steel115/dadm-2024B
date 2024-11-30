@@ -19,9 +19,12 @@ const showPlans = ref(false);
       Viajamos por el mundo para encontrar el mejor café de origen único para ti
     </h2>
 
-    <label><input type="checkbox" v-model="showPlans"> mostrar selector de planes </label>
+    <label>
+      <input type="checkbox" v-model="showPlans"> 
+      mostrar selector de planes 
+    </label>
 
-    <PlanPicker v-if="!showPlans"/>
+    <PlanPicker v-if="showPlans"/>
 
     
   </div>
